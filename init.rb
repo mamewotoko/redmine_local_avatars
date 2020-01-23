@@ -25,7 +25,8 @@ Redmine::Plugin.register :redmine_local_avatars do
   version '1.0.3'
 end
 
-ActionDispatch::Callbacks.to_prepare do
+# ActionDispatch::Callbacks.to_prepare do
+ActiveSupport::Reloader.to_prepare do
 	require_dependency 'project'
 	require_dependency 'principal'
 	require_dependency 'user'

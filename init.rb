@@ -25,8 +25,8 @@ Redmine::Plugin.register :redmine_local_avatars do
   version '1.0.3'
 end
 
-# ActionDispatch::Callbacks.to_prepare do
-ActiveSupport::Reloader.to_prepare do
+if Rails::VERSION::MAJOR == 5
+  ActiveSupport::Reloader.to_prepare do
 	require_dependency 'project'
 	require_dependency 'principal'
 	require_dependency 'user'
@@ -37,8 +37,21 @@ ActiveSupport::Reloader.to_prepare do
 	User.send(:include,  LocalAvatarsPlugin::UsersAvatarPatch)
 	UsersController.send(:include,  LocalAvatarsPlugin::UsersControllerPatch)
 	UsersHelper.send(:include,  LocalAvatarsPlugin::UsersHelperPatch)
-end
+  end
+else
+  ActionDispatch::Callbacks.to_prepare do
+	require_dependency 'project'
+	require_dependency 'principal'
+	require_dependency 'user'
 
+	AccountController.send(:include,  LocalAvatarsPlugin::AccountControllerPatch)
+	ApplicationHelper.send(:include,  LocalAvatarsPlugin::ApplicationAvatarPatch)
+	MyController.send(:include,  LocalAvatarsPlugin::MyControllerPatch)
+	User.send(:include,  LocalAvatarsPlugin::UsersAvatarPatch)
+	UsersController.send(:include,  LocalAvatarsPlugin::UsersControllerPatch)
+	UsersHelper.send(:include,  LocalAvatarsPlugin::UsersHelperPatch)
+  end
+end
 require 'local_avatars'
 
 # patches to Redmine

@@ -32,7 +32,8 @@ if Rails::VERSION::MAJOR == 5
 	require_dependency 'user'
 
 	AccountController.send(:include,  LocalAvatarsPlugin::AccountControllerPatch)
-	ApplicationHelper.send(:include,  LocalAvatarsPlugin::ApplicationAvatarPatch)
+	# ApplicationHelper.send(:include,  LocalAvatarsPlugin::ApplicationAvatarPatch)
+    AvatarsHelper.send(:include,  LocalAvatarsPlugin::ApplicationAvatarPatch)
 	MyController.send(:include,  LocalAvatarsPlugin::MyControllerPatch)
 	User.send(:include,  LocalAvatarsPlugin::UsersAvatarPatch)
 	UsersController.send(:include,  LocalAvatarsPlugin::UsersControllerPatch)

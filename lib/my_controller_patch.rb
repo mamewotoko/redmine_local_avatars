@@ -32,7 +32,7 @@ module LocalAvatarsPlugin
 		def avatar
 			@user = User.current
 		end
-
+  
 		def save_avatar
 			@user = User.current
 			begin

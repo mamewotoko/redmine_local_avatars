@@ -24,7 +24,17 @@ module LocalAvatarsPlugin
 			                       :type => av.content_type, 
 			                       :disposition => (av.image? ? 'inline' : 'attachment')) if av 
 		end
-
+        
+        def avatar_url(user)
+          if user.is_a?(User)then
+            av = user.attachments.find_by_description 'avatar'
+            if av then
+              return url_for :only_path => true, :controller => 'account', :action => 'get_avatar', :id => user
+            end
+          end
+          return nil
+        end
+        
 		# expects @user to be set.
 		# In case of error, raises an exception and sets @possible_error
 		def save_or_delete

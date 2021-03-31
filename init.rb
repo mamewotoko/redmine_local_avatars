@@ -33,11 +33,11 @@ if Rails::VERSION::MAJOR == 5
 
 	AccountController.send(:include,  LocalAvatarsPlugin::AccountControllerPatch)
 	# ApplicationHelper.send(:include,  LocalAvatarsPlugin::ApplicationAvatarPatch)
-    AvatarsHelper.send(:include,  LocalAvatarsPlugin::ApplicationAvatarPatch)
-	MyController.send(:include,  LocalAvatarsPlugin::MyControllerPatch)
+	AvatarsHelper.send(:include, LocalAvatarsPlugin::ApplicationAvatarPatch)
+	MyController.send(:include, LocalAvatarsPlugin::MyControllerPatch)
 	User.send(:include,  LocalAvatarsPlugin::UsersAvatarPatch)
-	UsersController.send(:include,  LocalAvatarsPlugin::UsersControllerPatch)
-	UsersHelper.send(:include,  LocalAvatarsPlugin::UsersHelperPatch)
+	UsersController.send(:include, LocalAvatarsPlugin::UsersControllerPatch)
+	UsersHelper.send(:include, LocalAvatarsPlugin::UsersHelperPatch)
   end
 else
   ActionDispatch::Callbacks.to_prepare do
@@ -46,11 +46,12 @@ else
 	require_dependency 'user'
 
 	AccountController.send(:include,  LocalAvatarsPlugin::AccountControllerPatch)
-	ApplicationHelper.send(:include,  LocalAvatarsPlugin::ApplicationAvatarPatch)
-	MyController.send(:include,  LocalAvatarsPlugin::MyControllerPatch)
-	User.send(:include,  LocalAvatarsPlugin::UsersAvatarPatch)
-	UsersController.send(:include,  LocalAvatarsPlugin::UsersControllerPatch)
-	UsersHelper.send(:include,  LocalAvatarsPlugin::UsersHelperPatch)
+#	ApplicationHelper.send(:include,  LocalAvatarsPlugin::ApplicationAvatarPatch)
+	AvatarsHelper.send(:include, LocalAvatarsPlugin::ApplicationAvatarPatch)
+	MyController.send(:include, LocalAvatarsPlugin::MyControllerPatch)
+	User.send(:include, LocalAvatarsPlugin::UsersAvatarPatch)
+	UsersController.send(:include, LocalAvatarsPlugin::UsersControllerPatch)
+	UsersHelper.send(:include, LocalAvatarsPlugin::UsersHelperPatch)
   end
 end
 require 'local_avatars'
